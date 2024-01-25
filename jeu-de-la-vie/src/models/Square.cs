@@ -13,6 +13,14 @@ public class Square {
     public bool IsAlive() {
         return this._state == 1;
     }
+
+    public void Born() {
+        this._state = 1;
+    }
+
+    public void Die() {
+        this._state = 0;
+    }
     
     public Color GetColor() {
         return this._state == 1 ? Raylib.WHITE : Raylib.BLACK;

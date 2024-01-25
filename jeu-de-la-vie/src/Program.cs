@@ -12,7 +12,7 @@ public static class Program {
         // == Configure & init window
         Raylib.SetConfigFlags(ConfigFlags.FLAG_WINDOW_RESIZABLE);
         Raylib.InitWindow(settings.Width, settings.Height, "Jeu de la vie");
-        Raylib.SetTargetFPS(60);
+        Raylib.SetTargetFPS(20);
         Raylib.MaximizeWindow();
         
         
@@ -28,6 +28,9 @@ public static class Program {
             
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Raylib.BLACK);
+            
+            // update matrix
+            gameOfLife.Update();
             
             // render all squares
             renderMatrix.MakeRenderMatrix(gameOfLife.Matrix);

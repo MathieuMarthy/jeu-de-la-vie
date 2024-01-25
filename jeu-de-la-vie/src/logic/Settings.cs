@@ -5,8 +5,8 @@ public class Settings {
 
     public int Width { get; private set; }  = 1920;
     public int Height { get; private set; } = 1080;
-    public int NumberOfSquaresHorizontal { get; private set; } = 100;
-    public int NumberOfSquaresVertical { get; private set; } = 100;
+    public int NumberOfSquaresHorizontal { get; private set; } = 200;
+    public int NumberOfSquaresVertical { get; private set; } = 200;
 
     private Settings() { }
     
