@@ -1,32 +1,36 @@
-﻿using jeu_de_la_vie.logic;
+﻿using System.Configuration;
+using jeu_de_la_vie.logic;
 using jeu_de_la_vie.render;
 using Raylib_CsLo;
 
 public static class Program {
     
-    const int WIDTH = 1280;
-    const int HEIGHT = 720;
-    
     public static void Main(string[] args) {
+
+        Settings settings = Settings.GetInstance();
         
-        // init window
-        Raylib.InitWindow(WIDTH, HEIGHT, "Jeu de la vie");
+        // == Configure & init window
+        Raylib.SetConfigFlags(ConfigFlags.FLAG_WINDOW_RESIZABLE);
+        Raylib.InitWindow(settings.Width, settings.Height, "Jeu de la vie");
         Raylib.SetTargetFPS(60);
+        Raylib.MaximizeWindow();
         
-        // init game of life
-        var gameOfLife = new GameOfLife(30);
+        
+        // Init game of life
+        var gameOfLife = new GameOfLife(settings.NumberOfSquaresVertical, settings.NumberOfSquaresHorizontal);
         gameOfLife.RandomBoard();
         
-        // Main loop
+        int squareSize = settings.Width / gameOfLife.Matrix.GetLength(0);
+        var renderMatrix = new RenderMatrix(squareSize);
+        
+        // == Main loop ==
         while (!Raylib.WindowShouldClose()) {
             
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Raylib.BLACK);
             
-            Raylib.DrawText("Hello, world!", WIDTH / 2, HEIGHT / 2, 20, Raylib.WHITE);
-            
             // render all squares
-            RenderMatrix.MakeRenderMatrix(gameOfLife.Matrix);
+            renderMatrix.MakeRenderMatrix(gameOfLife.Matrix);
             
             Raylib.EndDrawing();
         }

@@ -7,12 +7,14 @@ public class GameOfLife {
         get;
         private set;
     }
-    private readonly int _len;
+    private readonly int _verticalLen;
+    private readonly int _horizontalLen;
     private readonly Random _random = new ();
 
-    public GameOfLife(int len) {
-        this._len = len;
-        this.Matrix = new Square[len, len];
+    public GameOfLife(int verticalLen, int horizontalLen) {
+        this._verticalLen = verticalLen;
+        this._horizontalLen = horizontalLen;
+        this.Matrix = new Square[verticalLen, horizontalLen];
     }
 
     private Square GetRandomSquare() {
@@ -21,9 +23,9 @@ public class GameOfLife {
     }
 
     public void RandomBoard() {
-        for (int i = 0; i < this._len; i++) {
-            for (int j = 0; j < this._len; j++) {
-                this.Matrix[i, j] = this.GetRandomSquare();
+        for (int verticalIndex = 0; verticalIndex < this._verticalLen; verticalIndex++) {
+            for (int horizontalIndex = 0; horizontalIndex < this._horizontalLen; horizontalIndex++) {
+                this.Matrix[verticalIndex, horizontalIndex] = this.GetRandomSquare();
             }
         }
     }
